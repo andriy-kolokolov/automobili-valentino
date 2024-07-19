@@ -21,5 +21,5 @@ createInertiaApp({
         color: '#4B5563',
     },
 }).then(() => {
-    console.log('Inertia app created!');
+
 });
