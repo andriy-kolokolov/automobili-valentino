@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class ContactUsController extends Controller
 {
     public function index() {
-        dd("CONTACT-US");
+        dd("CONTACT-ASS");
     }
 }
