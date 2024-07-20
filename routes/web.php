@@ -23,7 +23,6 @@ Route::get('/news', [NewsController::class, 'index'])->name('news');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 
-Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');;
 
 Route::middleware([
     'auth:sanctum',
