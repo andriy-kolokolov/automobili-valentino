@@ -14,8 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            UserSeeder::class,
-            // можно добавить другие сидеры, предварительно создав их
+            AuthorSeeder::class,
+            NewsSeeder::class,
         ]);
     }
 }
