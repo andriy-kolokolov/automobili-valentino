@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Author;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +16,12 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
+
+//            $table->unsignedBigInteger('author_id');
+//            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+
+            $table->foreignIdFor(Author::class);
+
             $table->integer('views_count')->default(0);
             $table->boolean('is_hidden')->default(false);
             $table->string('image_path')->nullable();
