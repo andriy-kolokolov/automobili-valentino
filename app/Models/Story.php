@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class News extends Model
+class Story extends Model
 {
     use HasFactory;
 
@@ -18,8 +20,13 @@ class News extends Model
         'image_path',
     ];
 
-    public function author()
+    public function author() : BelongsTo
     {
         return $this->belongsTo(Author::class);
+    }
+
+    public function views() : HasMany
+    {
+        return $this->hasMany(View::class);
     }
 }

@@ -3,17 +3,17 @@
 namespace Database\Seeders;
 
 use App\Models\Author;
-use App\Models\News;
+use App\Models\Story;
 use Illuminate\Database\Seeder;
 
-class NewsSeeder extends Seeder
+class StorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run() : void
     {
-//        News::create([
+//        Story::create([
 //            'title'       => 'NEWS',
 //            'content'     => 'hooy sasi',
 //            'author_id'   => 1,
@@ -22,11 +22,11 @@ class NewsSeeder extends Seeder
 //            'image_path'  => 'path/image.jpg',
 //        ]);
         $firstAuthor = Author::first();
-        $news = new News();
+
+        $news = new Story();
 
         $news->title = 'NEWS';
         $news->content = 'hooy sasi';
-        $news->views_count = 0;
         $news->is_hidden = false;
         $news->image_path = 'path/image.jpg';
 

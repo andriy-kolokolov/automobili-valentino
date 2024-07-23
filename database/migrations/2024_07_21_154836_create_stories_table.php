@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('stories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
@@ -22,7 +22,6 @@ return new class extends Migration
 
             $table->foreignIdFor(Author::class);
 
-            $table->integer('views_count')->default(0);
             $table->boolean('is_hidden')->default(false);
             $table->string('image_path')->nullable();
             $table->timestamps();
@@ -34,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('stories');
     }
 };
