@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Author;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,13 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('stories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
             $table->text('content');
-            $table->unsignedBigInteger('author_id');
-            $table->foreign('author_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('views_count')->default(0);
+
+//            $table->unsignedBigInteger('author_id');
+//            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
+
+            $table->foreignIdFor(Author::class);
+
             $table->boolean('is_hidden')->default(false);
             $table->string('image_path')->nullable();
             $table->timestamps();
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('news');
+        Schema::dropIfExists('stories');
     }
 };
