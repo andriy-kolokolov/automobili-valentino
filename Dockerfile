@@ -1,5 +1,5 @@
 # APP
-FROM php:8.2-fpm-alpine as app
+FROM php:8.2-fpm-alpine AS app
 
 WORKDIR /var/www
 COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensions /usr/local/bin/
@@ -46,7 +46,7 @@ COPY . /var/www
 # copy existing application directory permissions
 COPY --chown=www-data:www-data . /var/www
 
-COPY .env.example .env
+#COPY .env.example .env
 
 # copy and make executable the entrypoint
 COPY --link docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
@@ -60,12 +60,12 @@ ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
 # NGINX
-FROM nginx:1.9-alpine as nginx
+FROM nginx:1.9-alpine AS nginx
 
 COPY --link docker/nginx/templates/default.conf.template /etc/nginx/conf.d/default.conf.template
 
 # NODE JS
-FROM node:20 as nodejs
+FROM node:20 AS nodejs
 
 WORKDIR /var/www
 

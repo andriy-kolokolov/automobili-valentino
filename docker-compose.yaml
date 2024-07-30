@@ -5,10 +5,11 @@ services:
       target: app
     container_name: app
     restart: unless-stopped
-    expose:
-      - "9000"
-    env_file:
-      - .env
+    environment:
+      DB_HOST: mysql
+      DB_PASSWORD: rootpasswd
+      DB_DATABASE: auto_val_db
+      DB_USERNAME: app_user
     volumes:
       - ./:/var/www
       - ./.env:/var/www/.env
@@ -21,15 +22,25 @@ services:
     restart: always
     ports:
       - "3306:3306"
-    env_file:
-      - .env
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:-auto_val_db}
+      MYSQL_DATABASE: auto_val_db
       MYSQL_USER: app_user
       MYSQL_PASSWORD: rootpasswd
       MYSQL_ROOT_PASSWORD: passwdroot
     volumes:
       - mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
 
   nginx:
     build:
@@ -51,8 +62,6 @@ services:
       target: nodejs
     container_name: nodejs
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     environment:
       - CHOKIDAR_USEPOLLING=true
     working_dir: /var/www
