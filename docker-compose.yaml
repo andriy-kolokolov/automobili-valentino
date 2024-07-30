@@ -5,14 +5,22 @@ services:
       target: app
     container_name: app
     restart: unless-stopped
+    env_file:
+      - .env
     environment:
       DB_HOST: mysql
       DB_PASSWORD: rootpasswd
       DB_DATABASE: auto_val_db
       DB_USERNAME: app_user
     volumes:
-      - ./:/var/www
-      - ./.env:/var/www/.env
+      - ./:/var/www:cached
+      - /var/www/vendor
+      - /var/www/node_modules
+      - tempdata:/var/www/storage/logs
+      - tempdata:/var/www/storage/framework/cache
+      - tempdata:/var/www/storage/framework/sessions
+      - tempdata:/var/www/storage/framework/views
+      - tempdata:/var/www/bootstrap/cache
     depends_on:
       - mysql
 
@@ -67,9 +75,14 @@ services:
     working_dir: /var/www
     command: npm run watch
     volumes:
-      - ./:/var/www
+      - ./:/var/www:cached
       - /var/www/node_modules
 
 volumes:
   mysql_data:
   node_modules:
+  tempdata:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
