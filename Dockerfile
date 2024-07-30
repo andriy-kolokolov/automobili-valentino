@@ -72,8 +72,8 @@ WORKDIR /var/www
 # Copy `package.json` and `package-lock.json`
 COPY package*.json ./
 
-# Install project dependencies
-RUN npm install
+# Install project dependencies with logging
+RUN npm install --loglevel=verbose
 
 # Copy project files into the docker image
 COPY . .
@@ -81,4 +81,4 @@ COPY . .
 # Expose the port Vite runs on
 EXPOSE 3000
 
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "watch"]
