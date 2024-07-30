@@ -25,12 +25,27 @@ class StorySeeder extends Seeder
 
         $news = new Story();
 
-        $news->title = 'NEWS';
+        $news->title = 'NEWS_1';
         $news->content = 'hooy sasi';
         $news->is_hidden = false;
         $news->image_path = 'path/image.jpg';
-
         $news->author()->associate($firstAuthor);
         $news->save();
+
+        $news2 = new Story();
+        $news2->title = 'NEWS_2';
+        $news2->content = 'black hole its your anus';
+        $news2->is_hidden = false;
+        $news2->image_path = 'path/image2.jpg';
+        $news2->author()->associate($firstAuthor);
+        $news2->save();
+
+        $news3 = new Story();
+        $news3->title = 'NEWS_3';
+        $news3->content = 'im talking to cops quietly';
+        $news3->is_hidden = false;
+        $news3->image_path = 'path/image3.jpg';
+        $news3->author()->associate($firstAuthor);
+        $news3->save();
     }
 }
