@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import vue from '@vitejs/plugin-vue';
+import { resolve } from "node:path";
+import {AntDesignVueResolver} from 'unplugin-vue-components/resolvers';
+import Components from 'unplugin-vue-components/vite';
 
 export default defineConfig({
     server: {
@@ -10,6 +13,13 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
+    },
+    resolve: {
+        alias: {
+            'ziggy-js': resolve('vendor/tightenco/ziggy'),
+            '@': resolve(__dirname, 'resources/js'),
+            '@/': resolve(__dirname, 'resources/js'),
+        }
     },
     plugins: [
         laravel({
@@ -23,6 +33,13 @@ export default defineConfig({
                     includeAbsolute: false,
                 },
             },
+        }),
+        Components({
+            resolvers: [
+                AntDesignVueResolver({
+                    importStyle: false,
+                }),
+            ],
         }),
     ],
 });

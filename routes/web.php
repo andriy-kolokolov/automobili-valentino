@@ -11,19 +11,21 @@ use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
 // все маршруты здесь доступны всем
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-Route::get('/cars-selling', [CarsSellingController::class, 'index'])->name('cars-selling');
+Route::get('/cars-selling', [CarsSellingController::class, 'index'])->name('cars-selling.index');
 
-Route::get('/assistance', [AssistanceController::class, 'index'])->name('assistance');;
+Route::get('/assistance', [AssistanceController::class, 'index'])->name('assistance.index');
 
-Route::get('/news', [StoryController::class, 'index'])->name('stories');
+Route::get('/news', [StoryController::class, 'index'])->name('stories.index');
+Route::get('/news/create', [StoryController::class, 'create'])->name('stories.create');
+Route::post('/news', [StoryController::class, 'store'])->name('stories.store');
 
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 
-Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');;
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us.index');
 
 Route::middleware([
     'auth:sanctum',
