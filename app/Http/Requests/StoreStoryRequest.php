@@ -8,13 +8,15 @@ class StoreStoryRequest extends FormRequest
 {
     public function rules() : array
     {
-        // dd($this->all());
+        //dd($this->all());
 
         // валидация данных из фронта.
         // https://laravel.com/docs/11.x/validation#available-validation-rules
         return [
             'title' => 'required|string|max:255',
-            // ...
+            'content' => 'required|string|max:1024',
+            'author_id' => 'required|integer|exists:authors,id',
+            'image_path' => 'nullable|string|max:255',
         ];
     }
 }

@@ -35,6 +35,13 @@ class StoryController extends Controller
     {
         $validated = $request->validated(); // проверенные данные с которыми безопасно работать
 
-        return to_route('stories.index');
+        Story::create([
+            'title' => $validated['title'],
+            'content' => $validated['content'],
+            'author_id' => $validated['author_id'],
+            'image_path' => $validated['image_path'] ?? null,
+        ]);
+
+        return redirect()->route('stories.index');
     }
 }
