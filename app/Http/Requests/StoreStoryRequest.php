@@ -14,7 +14,7 @@ class StoreStoryRequest extends FormRequest
         // https://laravel.com/docs/11.x/validation#available-validation-rules
         return [
             'title' => 'required|string|max:255',
-            'content' => 'required|string|max:1024',
+            'content' => 'required|string|max:65535',
             'author_id' => 'required|integer|exists:authors,id',
             'image_path' => 'nullable|string|max:255',
         ];

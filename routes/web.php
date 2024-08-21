@@ -21,10 +21,13 @@ Route::get('/assistance', [AssistanceController::class, 'index'])->name('assista
 
 Route::get('/news', [StoryController::class, 'index'])->name('stories.index');
 Route::get('/news/create', [StoryController::class, 'create'])->name('stories.create');
+Route::post('/news', [StoryController::class, 'store'])->name('stories.store');
+
+Route::get('/news/{story}/edit', [StoryController::class, 'edit'])->name('stories.edit');
+Route::put('/news/{story}', [StoryController::class, 'update'])->name('stories.update');
 
 Route::delete('/news/{story}', [StoryController::class, 'destroy'])->name('stories.destroy');
 
-Route::post('/news', [StoryController::class, 'store'])->name('stories.store');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
 

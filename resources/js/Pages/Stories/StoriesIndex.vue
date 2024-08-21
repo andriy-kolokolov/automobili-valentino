@@ -2,6 +2,7 @@
 import { defineComponent, PropType } from "vue";
 import { Head, Link, router } from "@inertiajs/vue3";
 import { Author, Story } from "@/types/Models";
+import { route } from "ziggy-js";
 import MsBaseLayout from "@/Layouts/MsBaseLayout.vue";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons-vue";
 import { notification } from "ant-design-vue";
@@ -20,7 +21,7 @@ export default defineComponent({
         },
     },
     data() {
-        return {deleting: false,};
+        return { deleting: false, };
     },
     methods: {
         getAuthorById(authorId: number): Author | undefined {
@@ -29,12 +30,19 @@ export default defineComponent({
         getAuthorsFullName(author: Author | undefined): string {
             if (author === undefined) return "";
 
-            return `${ author.name } ${ author.lastname }`;
+            return `${author.name} ${author.lastname}`;
         },
-deleteStory(storyId: number) {
+        deleteStory(storyId: number | undefined) {
+            if (!storyId) {
+                notification.error({
+                    message: "Error!",
+                    description: "StoryId is undefined!",
+                });
+                return;
+            }
             if (confirm("Are you sure you want to delete this story?")) {
                 this.deleting = true;
-                router.delete(`/news/${storyId}`, {
+                router.delete(route("stories.destroy", storyId), {
                     preserveState: true,
                     preserveScroll: true,
                     onBefore: () => {
@@ -64,15 +72,9 @@ deleteStory(storyId: number) {
 
 <template>
     <ms-base-layout page-title="Stories">
-        <a-row :gutter="[12 ,12]">
-            <a-col
-                v-for="story in stories"
-                :lg="12"
-                :xxl="8"
-            >
-                <a-card
-                    :key="story.id"
-                >
+        <a-row :gutter="[12, 12]">
+            <a-col v-for="story in stories" :lg="12" :xxl="8">
+                <a-card :key="story.id">
                     <template #title>
                         <a-row>
                             <a-col :span="24">
@@ -117,10 +119,7 @@ deleteStory(storyId: number) {
                     <template #extra>
                         <a-row>
                             <a-col :span="24">
-                                <a-button
-                                    :href="`/stories/${story.id}`"
-                                    type="primary"
-                                >
+                                <a-button :href="`/stories/${story.id}`" type="primary">
                                     Read more
                                 </a-button>
                             </a-col>
@@ -129,8 +128,7 @@ deleteStory(storyId: number) {
 
                     <template #actions>
                         <EditOutlined />
-                        <DeleteOutlined :style="{color: 'red'}"
-                        @click="deleteStory(story.id)"/>
+                        <DeleteOutlined :style="{ color: 'red' }" @click="deleteStory(story.id)" />
                     </template>
                 </a-card>
             </a-col>
