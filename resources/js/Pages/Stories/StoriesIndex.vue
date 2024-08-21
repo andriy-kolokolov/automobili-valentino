@@ -1,9 +1,10 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { Head, Link } from "@inertiajs/vue3";
+import { Head, Link, router } from "@inertiajs/vue3";
 import { Author, Story } from "@/types/Models";
 import MsBaseLayout from "@/Layouts/MsBaseLayout.vue";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons-vue";
+import { notification } from "ant-design-vue";
 
 export default defineComponent({
     name: "StoriesIndex",
@@ -19,7 +20,7 @@ export default defineComponent({
         },
     },
     data() {
-        return {};
+        return {deleting: false,};
     },
     methods: {
         getAuthorById(authorId: number): Author | undefined {
@@ -29,6 +30,33 @@ export default defineComponent({
             if (author === undefined) return "";
 
             return `${ author.name } ${ author.lastname }`;
+        },
+deleteStory(storyId: number) {
+            if (confirm("Are you sure you want to delete this story?")) {
+                this.deleting = true;
+                router.delete(`/news/${storyId}`, {
+                    preserveState: true,
+                    preserveScroll: true,
+                    onBefore: () => {
+                        console.log("Before sending request");
+                    },
+                    onError: (errors) => {
+                        console.log("Error while deleting");
+                        console.warn(errors);
+                        this.deleting = false;
+                    },
+                    onSuccess: () => {
+                        notification.success({
+                            message: "Success!",
+                            description: "Story has been deleted successfully",
+                        });
+                    },
+                    onFinish: () => {
+                        console.log("Finish request");
+                        this.deleting = false;
+                    },
+                });
+            }
         },
     },
 });
@@ -101,7 +129,8 @@ export default defineComponent({
 
                     <template #actions>
                         <EditOutlined />
-                        <DeleteOutlined :style="{color: 'red'}" />
+                        <DeleteOutlined :style="{color: 'red'}"
+                        @click="deleteStory(story.id)"/>
                     </template>
                 </a-card>
             </a-col>

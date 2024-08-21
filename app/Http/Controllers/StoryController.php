@@ -44,4 +44,11 @@ class StoryController extends Controller
 
         return redirect()->route('stories.index');
     }
+
+    public function destroy(Story $story) : RedirectResponse
+    {
+        $story->delete();
+
+        return redirect()->route('stories.index')->with('success', 'Story deleted successfully');
+    }
 }

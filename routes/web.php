@@ -21,6 +21,9 @@ Route::get('/assistance', [AssistanceController::class, 'index'])->name('assista
 
 Route::get('/news', [StoryController::class, 'index'])->name('stories.index');
 Route::get('/news/create', [StoryController::class, 'create'])->name('stories.create');
+
+Route::delete('/news/{story}', [StoryController::class, 'destroy'])->name('stories.destroy');
+
 Route::post('/news', [StoryController::class, 'store'])->name('stories.store');
 
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery.index');
