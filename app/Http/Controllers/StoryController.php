@@ -64,10 +64,10 @@ class StoryController extends Controller
             'title' => $validated['title'],
             'content' => $validated['content'],
             'author_id' => $validated['author_id'],
-            'image_path' => $validated['image_path'] ?? $story->image_path,
+            'image_path' => $validated['image_path'] ?? null,
         ]);
 
-        return redirect()->route('stories.index')->with('success', 'Story updated successfully');
+        return redirect()->route('stories.index');
     }
 
     public function destroy(Story $story) : RedirectResponse

@@ -66,6 +66,17 @@ export default defineComponent({
                 });
             }
         },
+
+        editStory(storyId: number | undefined) {
+            if (!storyId) {
+                notification.error({
+                    message: "Error!",
+                    description: "StoryId is undefined!",
+                });
+                return;
+            }
+            router.visit(route("stories.edit", storyId));
+        },
     },
 });
 </script>
@@ -127,7 +138,7 @@ export default defineComponent({
                     </template>
 
                     <template #actions>
-                        <EditOutlined />
+                        <EditOutlined @click="editStory(story.id)" />
                         <DeleteOutlined :style="{ color: 'red' }" @click="deleteStory(story.id)" />
                     </template>
                 </a-card>
