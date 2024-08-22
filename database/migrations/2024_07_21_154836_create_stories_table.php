@@ -22,6 +22,7 @@ return new class extends Migration
 
             $table->foreignIdFor(Author::class);
 
+            $table->bigInteger('views_count')->default(false);
             $table->boolean('is_hidden')->default(false);
             $table->string('image_path')->nullable();
             $table->timestamps();

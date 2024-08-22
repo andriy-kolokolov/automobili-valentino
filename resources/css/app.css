@@ -1,7 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "reset.css";
 
-[x-cloak] {
-    display: none;
+.ant-typography {
+    margin-bottom: 0 !important;
 }
