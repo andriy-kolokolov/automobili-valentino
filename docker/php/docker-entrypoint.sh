@@ -30,9 +30,8 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
     echo "The database is now ready and reachable"
   fi
 
-   # Set permissions for Laravel directories
-#  chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
-#  chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+  #create laravel default folders
+  mkdir -p /var/www/storage/framework/cache /var/www/storage/framework/sessions /var/www/storage/framework/views /var/www/storage/logs /var/www/storage/framework/testing
 
   # Run migrations
   php artisan migrate --force

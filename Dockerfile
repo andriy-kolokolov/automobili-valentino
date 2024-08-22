@@ -46,7 +46,7 @@ COPY . /var/www
 # copy existing application directory permissions
 COPY --chown=www-data:www-data . /var/www
 
-#COPY .env.example .env
+COPY .env.example .env
 
 # copy and make executable the entrypoint
 COPY --link docker/php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
