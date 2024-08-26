@@ -2,6 +2,7 @@
     <ms-base-layout page-title="Cars Selling">
         <h1>Cars Selling Page</h1>
         <p>Info about cars</p>
+        <iframe src="https://www.autoscout24.it/concessionari/automobili-valentino-srl/veicoli"> </iframe>
     </ms-base-layout>
 </template>
 
