@@ -9,6 +9,6 @@ class AssistanceController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Assistance');
+        return Inertia::render('Assistance/AssistanceIndex');
     }
 }

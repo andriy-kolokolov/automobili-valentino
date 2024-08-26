@@ -9,6 +9,6 @@ class GalleryController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Gallery');
+        return Inertia::render('Gallery/GalleryIndex');
     }
 }

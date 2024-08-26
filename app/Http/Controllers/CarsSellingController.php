@@ -8,6 +8,6 @@ use Inertia\Inertia;
 class CarsSellingController extends Controller
 {
     public function index() {
-        return Inertia::render('CarsSelling');
+        return Inertia::render('CarsSelling/CarsSellingIndex');
     }
 }
