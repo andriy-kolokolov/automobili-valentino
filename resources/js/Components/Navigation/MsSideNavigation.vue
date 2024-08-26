@@ -3,8 +3,15 @@ import { defineComponent, h } from "vue";
 import { ItemType } from "ant-design-vue/es/menu/src/hooks/useItems";
 import { route, RouteList } from "ziggy-js";
 import { router } from "@inertiajs/vue3";
-import { PlusCircleOutlined, UnorderedListOutlined } from "@ant-design/icons-vue";
-
+import { 
+    PlusCircleOutlined, 
+    UnorderedListOutlined, 
+    HomeOutlined, 
+    CarOutlined, 
+    InfoCircleOutlined, 
+    PictureOutlined, 
+    PhoneOutlined 
+} from "@ant-design/icons-vue";
 
 type MenuItem = ItemType & {
     key: keyof RouteList;
@@ -19,6 +26,12 @@ export default defineComponent({
     name: "MsSideNavigation",
     components: {
         PlusCircleOutlined,
+        UnorderedListOutlined,
+        HomeOutlined,
+        CarOutlined,
+        InfoCircleOutlined,
+        PictureOutlined,
+        PhoneOutlined
     },
     data() {
         return {};
@@ -26,12 +39,30 @@ export default defineComponent({
     methods: {
         handleMenuItemClick(itemClickEvent: any) {
             const routeName = itemClickEvent.item.route;
-            router.get(route(routeName))
+            router.get(route(routeName));
         },
     },
     computed: {
         menuItems() {
             return [
+                {
+                    key: "home.index",
+                    route: "home.index",
+                    label: "Home",
+                    icon: () => h(HomeOutlined),
+                },
+                {
+                    key: "cars-selling.index",
+                    route: "cars-selling.index",
+                    label: "Cars Selling",
+                    icon: () => h(CarOutlined),
+                },
+                {
+                    key: "assistance.index",
+                    route: "assistance.index",
+                    label: "Assistance",
+                    icon: () => h(InfoCircleOutlined),
+                },
                 {
                     key: "stories.index",
                     route: "stories.index",
@@ -43,6 +74,18 @@ export default defineComponent({
                     route: "stories.create",
                     label: "Create Story",
                     icon: () => h(PlusCircleOutlined),
+                },
+                {
+                    key: "gallery.index",
+                    route: "gallery.index",
+                    label: "Gallery",
+                    icon: () => h(PictureOutlined),
+                },
+                {
+                    key: "contact-us.index",
+                    route: "contact-us.index",
+                    label: "Contact Us",
+                    icon: () => h(PhoneOutlined),
                 },
             ] as MenuItem[];
         },
@@ -64,5 +107,4 @@ export default defineComponent({
 </template>
 
 <style scoped>
-
 </style>

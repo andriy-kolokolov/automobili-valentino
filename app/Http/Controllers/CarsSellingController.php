@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CarsSellingController extends Controller
 {
     public function index() {
-        dd("CARS-SELLING");
+        return Inertia::render('CarsSelling/CarsSellingIndex');
     }
 }

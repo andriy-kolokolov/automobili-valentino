@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class AssistanceController extends Controller
 {
-    public function index() {
-        dd("ASSISTANCE");
+    public function index()
+    {
+        return Inertia::render('Assistance/AssistanceIndex');
     }
 }
