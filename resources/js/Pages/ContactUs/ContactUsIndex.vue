@@ -3,8 +3,8 @@
         <h1>Contact Us Page</h1>
         <p>Our contacts</p>
 
-        <a-row gutter="16">
-            <a-col :xs="24" :sm="12" :md="8">
+        <a-row :gutter="[16, 16]">
+            <a-col :xs="24" :sm="24" :md="12" :lg="8">
                 <a-card bordered>
                     <template #title>
                         <SoundOutlined /> Telefono
@@ -14,7 +14,7 @@
                     <p>+393465588700</p>
                 </a-card>
             </a-col>
-            <a-col :xs="24" :sm="12" :md="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="8">
                 <a-card bordered>
                     <template #title>
                         <MailOutlined /> E-mail
@@ -22,7 +22,7 @@
                     <p>automobilivalentino@gmail.com</p>
                 </a-card>
             </a-col>
-            <a-col :xs="24" :sm="12" :md="8">
+            <a-col :xs="24" :sm="24" :md="12" :lg="8">
                 <a-card bordered>
                     <template #title>
                         <EnvironmentOutlined /> Indirizzo
